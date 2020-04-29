@@ -23,6 +23,16 @@ enable :sessions
 # ----------------------------------------------------------------------
 
 class CustomHandler < AlexaSkillsRuby::Handler
+  on_intent("HERE") do
+		# add a response to Alexa
+    response.set_output_speech_text("I've updated your status to Here ")
+		# create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+		# log the output if needed
+    logger.info 'Here processed'
+		# send a message to slack
+    update_status "HERE"
+  end
 
   on_intent("GetZodiacHoroscopeIntent") do
     slots = request.intent.slots
@@ -127,4 +137,4 @@ def post_to_slack status_update, message
 	# Post it to Slack
   HTTParty.post slack_webhook, body: {text: formatted_message.to_s, username: "OutOfOfficeBot", channel: "back" }.to_json, headers: {'content-type' => 'application/json'}
 
-end 
+end
