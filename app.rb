@@ -23,6 +23,7 @@ enable :sessions
 # ----------------------------------------------------------------------
 
 class CustomHandler < AlexaSkillsRuby::Handler
+
   on_intent("HERE") do
 		# add a response to Alexa
     response.set_output_speech_text("I've updated your status to Here ")
@@ -32,6 +33,39 @@ class CustomHandler < AlexaSkillsRuby::Handler
     logger.info 'Here processed'
 		# send a message to slack
     update_status "HERE"
+  end
+
+  on_intent("BE_RIGHT_BACK") do
+		# add a response to Alexa
+    response.set_output_speech_text("I've updated your status to BE_RIGHT_BACK ")
+		# create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+		# log the output if needed
+    logger.info 'BE_RIGHT_BACK processed'
+		# send a message to slack
+    update_status "BE_RIGHT_BACK"
+  end
+
+  on_intent("GONE_HOME") do
+		# add a response to Alexa
+    response.set_output_speech_text("I've updated your status to GONE_HOME")
+		# create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+		# log the output if needed
+    logger.info 'GONE_HOME processed'
+		# send a message to slack
+    update_status "GONE_HOME"
+  end
+
+  on_intent("DO_NOT_DISTURB") do
+    # add a response to Alexa
+    response.set_output_speech_text("I've updated your status to DO_NOT_DISTURB")
+    # create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'DO_NOT_DISTURB processed'
+    # send a message to slack
+    update_status "DO_NOT_DISTURB"
   end
 
   on_intent("AMAZON.HelpIntent") do
