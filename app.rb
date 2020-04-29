@@ -19,7 +19,7 @@ enable :sessions
 
 
 # ----------------------------------------------------------------------
-#     How you handle your Alexa 
+#     How you handle your Alexa
 # ----------------------------------------------------------------------
 
 class CustomHandler < AlexaSkillsRuby::Handler
@@ -46,7 +46,7 @@ get '/' do
 end
 
 
-# THE APPLICATION ID CAN BE FOUND IN THE 
+# THE APPLICATION ID CAN BE FOUND IN THE
 
 
 post '/incoming/alexa' do
@@ -72,7 +72,7 @@ end
 
 
 
-error 401 do 
+error 401 do
   "Not allowed!!!"
 end
 
@@ -82,3 +82,49 @@ end
 # ----------------------------------------------------------------------
 
 private
+
+def update_status status, duration = nil
+
+	# gets a corresponding message
+  message = get_message_for status, duration
+	# posts it to slack
+  post_to_slack status, message
+
+end
+
+def get_message_for status, duration
+
+	# Default response
+  message = "other/unknown"
+
+	# looks up a message based on the Status provided
+  if status == "HERE"
+    message = ENV['APP_USER'].to_s + " is in the office."
+  elsif status == "BACK_IN"
+    message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
+  elsif status == "BE_RIGHT_BACK"
+    message = ENV['APP_USER'].to_s + " will be right back"
+  elsif status == "GONE_HOME"
+    message = ENV['APP_USER'].to_s + " has left for the day. Check back tomorrow."
+  elsif status == "DO_NOT_DISTURB"
+    message = ENV['APP_USER'].to_s + " is busy. Please do not disturb."
+  end
+
+	# return the appropriate message
+  message
+
+end
+
+def post_to_slack status_update, message
+
+	# look up the Slack url from the env
+  slack_webhook = ENV['SLACK_WEBHOOK']
+
+	# create a formatted message
+  formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
+  formatted_message += "#{message} "
+
+	# Post it to Slack
+  HTTParty.post slack_webhook, body: {text: formatted_message.to_s, username: "OutOfOfficeBot", channel: "back" }.to_json, headers: {'content-type' => 'application/json'}
+
+end 
