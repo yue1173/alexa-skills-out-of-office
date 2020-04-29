@@ -37,7 +37,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("BE_RIGHT_BACK") do
 		# add a response to Alexa
-    response.set_output_speech_text_ssml("<speak><amazon:effect name="whispered">I've updated your status to BE_RIGHT_BACK </amazon:effect></speak>")
+    response.set_output_speech_ssml("<speak>I've updated your status to <break time="3s"/> BE_RIGHT_BACK </speak>")
 		# create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
 		# log the output if needed
