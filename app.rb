@@ -26,7 +26,18 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("Greeting") do
     # add a response to Alexa
-    response.set_output_speech_text("Hi, morning! Let's study together today! ")
+    response.set_output_speech_text("Hi! How are you? I am your study buddy! You can ask 'who you are' to know more about me or directly go to study by saying ’study time begins ")
+    # create a card response in the alexa app
+    response.set_simple_card("study with me App", "Study time from now on.")
+    # log the output if needed
+    logger.info 'Greeting processed'
+    # send a message to slack
+    update_status "Morning."
+  end
+
+  on_intent("AMAZON.Helpintent") do
+    # add a response to Alexa
+    response.set_output_speech_text("I am your study buddy. I can help you set study time for your everyday study. You can set multiple rounds of study and each round will lasting 30 minutes, including 25-minute studying time and 5-minute rest time. Also I can provide you different help in your study process. You can call me to tell jokes or help you find music you like. ")
     # create a card response in the alexa app
     response.set_simple_card("study with me App", "Study time from now on.")
     # log the output if needed
