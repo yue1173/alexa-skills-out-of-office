@@ -26,7 +26,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("Greeting") do
     # add a response to Alexa
-    response.set_output_speech_text("Hi! How are you? I am your study buddy! You can ask 'who you are' to know more about me or directly go to study by saying ’study time begins ")
+    response.set_output_speech_text("Hi! How are you? I am your study buddy! You can ask 'who are you' to know more about me or directly go to study by saying ’study time begins ")
     # create a card response in the alexa app
     response.set_simple_card("study with me App", "Study time from now on.")
     # log the output if needed
