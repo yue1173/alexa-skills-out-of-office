@@ -24,6 +24,17 @@ enable :sessions
 
 class CustomHandler < AlexaSkillsRuby::Handler
 
+  on_intent("Greeting") do
+    # add a response to Alexa
+    response.set_output_speech_text("Hi, morning! Let's study together today! ")
+    # create a card response in the alexa app
+    response.set_simple_card("study with me App", "Study time from now on.")
+    # log the output if needed
+    logger.info 'Greeting processed'
+    # send a message to slack
+    update_status "Morning."
+  end
+
   on_intent("HERE") do
 		# add a response to Alexa
     response.set_output_speech_text("I've updated your status to Here ")
