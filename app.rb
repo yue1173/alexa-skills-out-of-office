@@ -35,7 +35,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     update_status "Morning."
   end
 
-  on_intent("AMAZON.Helpintent") do
+  on_intent("AMAZON.HelpIntent") do
     # add a response to Alexa
     response.set_output_speech_text("I am your study buddy. I can help you set study time for your everyday study. You can set multiple rounds of study and each round will lasting 30 minutes, including 25-minute studying time and 5-minute rest time. Also I can provide you different help in your study process. You can call me to tell jokes or help you find music you like. ")
     # create a card response in the alexa app
@@ -88,11 +88,6 @@ class CustomHandler < AlexaSkillsRuby::Handler
     logger.info 'DO_NOT_DISTURB processed'
     # send a message to slack
     update_status "DO_NOT_DISTURB"
-  end
-
-  on_intent("AMAZON.HelpIntent") do
-    response.set_output_speech_text("You can ask me to tell you the current out of office status by saying current status. You can update your stats by saying tell out of office i'll be right back, i've gone home, i'm busy, i'm here or i'll be back in 10 minutes")
-    logger.info 'HelpIntent processed'
   end
 
   on_intent("BACK_IN") do
