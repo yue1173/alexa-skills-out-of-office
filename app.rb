@@ -192,7 +192,7 @@ end
 
 private
 
-def get_message_for status
+def update_status status
 
 # Default response
   message = "other/unknown"
