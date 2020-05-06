@@ -84,7 +84,7 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
   on_intent("STUDYTIMEEND") do
     # add a response to Alexa
     response.set_output_speech_ssml("<speak>
-    <amazon:emotion name='excited' intensity='strong'>
+    <amazon:emotion name='excited' intensity='medium'>
         You did a really good job!
     </amazon:emotion>
   </speak>")
