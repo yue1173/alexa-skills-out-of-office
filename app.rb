@@ -28,7 +28,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 		# add a response to Alexa
     response.set_output_speech_text("How are you today?")
 		# create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
 		# log the output if needed
     logger.info 'Greeting processed'
 		# send a message to slack
@@ -39,7 +39,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # add a response to Alexa
     response.set_output_speech_text("Good! I am your study bot. Welcome to study with me and you can get to know me more by saying who are you . Or you can start your study today now by saying study now")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'CHECKSTUDY processed'
     # send a message to slack
@@ -59,7 +59,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     </amazon:emotion>
   </speak>")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'STUDYTIME'
     # send a message to slack
@@ -70,7 +70,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # add a response to Alexa
     response.set_output_speech_text("It is OK. Life is not easy for any of us but you have me. Do you want some jokes? Just say jokes")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'UPSET processed'
     # send a message to slack
@@ -82,7 +82,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     response.set_output_speech_text("A bear walks into a bar and says, Give me a whiskey and cola.
 Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was born with them.")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'JOKES processed'
     # send a message to slack
@@ -92,10 +92,10 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
   on_intent("GIVEUP") do
     # add a response to Alexa
     response.set_output_speech_text("<speak>
-    <amazon:domain name="music">Hey, come on! Anyone can hide. Facing up to things, working through them, that is what makes you strong. </amazon:domain>
+    <amazon:domain name='music'>Hey, come on! Anyone can hide. Facing up to things, working through them, that is what makes you strong. </amazon:domain>
 </speak>")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'GIVEUP processed'
     # send a message to slack
@@ -110,7 +110,7 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     </amazon:emotion>
   </speak>")
     # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
+    response.set_simple_card("study with me App", "Status is in the office.")
     # log the output if needed
     logger.info 'STUDYTIMEEND'
     # send a message to slack
