@@ -75,7 +75,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("JOKES") do
     # add a response to Alexa
-    response.set_output_speech_text('<speak><amazon:domain name=\'music\'>A bear walks into a bar and says, Give me a whiskey and cola.
+    response.set_output_speech_text('<speak><amazon:domain name=\'music\'>A bear walks into a bar and says, Give me a whiskey and <break time='3s'/> cola.
 Why the big pause? asks the bartender. The bear shrugged. I am not sure. I was born with them.</amazon:domain></speak>')
     # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
