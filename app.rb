@@ -210,16 +210,6 @@ def update_status status
 	# gets a corresponding message
   message = get_message_for status
 	# posts it to slack
-  send_to_twilio message
-
-end
-
-def send_to_twilio message
-
-  # Default response
-  # message = "other/unknown"
-
-  # looks up a message based on the Status provided
   client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
   client.api.account.messages.create(
     from: ENV["TWILIO_FROM"],
@@ -229,6 +219,8 @@ def send_to_twilio message
 
 end
 
+
+
 def get_message_for status
 
 	# Default response
@@ -236,7 +228,7 @@ def get_message_for status
 
 	# looks up a message based on the Status provided
   if status == "STUDYTIME"
-    message = ENV['APP_USER'].to_s + " study time begins."
+    message = ENV['APP_USER'].to_s + ", study time begins."
   # #elsif status == "BACK_IN"
   #   message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
   # elsif status == "BE_RIGHT_BACK"
