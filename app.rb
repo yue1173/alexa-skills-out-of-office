@@ -21,10 +21,10 @@ end
 # enable sessions for this project
 enable :sessions
 
+
 post '/' do
   Ralyxa::Skill.handle(request)
 end
-
 
 # ----------------------------------------------------------------------
 #     How you handle your Alexa
@@ -33,8 +33,19 @@ end
 class CustomHandler < AlexaSkillsRuby::Handler
 
 
-  on_intent("firstsentence") do
-  ask("How are you today?")
+  #on_intent("firstsentence") do
+  #ask("How are you today?")
+#end
+
+on_intent("firstsentence") do
+  # add a response to Alexa
+  response.set_output_speech_text("How are you doing ")
+  # create a card response in the alexa app
+  response.set_simple_card("study with me App", "firstsentence.")
+  # log the output if needed
+  logger.info 'firstsentence processed'
+  # send a message to slack
+  update_status "firstsentence."
 end
 
   on_intent("Greeting") do
@@ -45,7 +56,7 @@ end
     # log the output if needed
     logger.info 'Greeting processed'
     # send a message to slack
-    update_status "Morning."
+    update_status "Greeting."
   end
 
   intent "PlayAudio" do
