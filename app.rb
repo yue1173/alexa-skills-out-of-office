@@ -210,8 +210,6 @@ def update_status status
   #   message = ENV['APP_USER'].to_s + " is busy. Please do not disturb."
   end
 
-# return the appropriate message
-  return message
 
   client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
   message="This is Carol's first chatbot"
