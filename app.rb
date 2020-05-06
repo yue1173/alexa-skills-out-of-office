@@ -36,16 +36,16 @@ class CustomHandler < AlexaSkillsRuby::Handler
   #ask("How are you today?")
 #end
 
-on_intent("firstsentence") do
+#on_intent("firstsentence") do
   # add a response to Alexa
-  response.set_output_speech_text("How are you doing ")
+  #response.set_output_speech_text("How are you doing ")
   # create a card response in the alexa app
-  response.set_simple_card("study with me App", "firstsentence.")
+  #response.set_simple_card("study with me App", "firstsentence.")
   # log the output if needed
-  logger.info 'firstsentence processed'
+  #logger.info 'firstsentence processed'
   # send a message to slack
-  update_status "firstsentence."
-end
+  #update_status "firstsentence."
+#end
 
   on_intent("Greeting") do
     # add a response to Alexa
