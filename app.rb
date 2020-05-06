@@ -190,7 +190,7 @@ end
 post '/incoming/alexa' do
   content_type :json
 
-  handler = CustomHandler.new(application_id: ENV['ALEXA_APPLICATION_ID'], logger: logger)
+  handler = CustomHandler.new(application_id: ENV['ALEXA_APPLICATION_ID_NEW'], logger: logger)
 
   begin
     hdrs = { 'Signature' => request.env['HTTP_SIGNATURE'], 'SignatureCertChainUrl' => request.env['HTTP_SIGNATURECERTCHAINURL'] }
