@@ -81,7 +81,22 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
 
   end
 
+  on_intent("STUDYTIMEEND") do
+    # add a response to Alexa
+    response.set_output_speech_ssml("<speak>
+    <amazon:emotion name='excited' intensity='strong'>
+        You did a really good job!
+    </amazon:emotion>
+  </speak>")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'STUDYTIMEEND'
+    # send a message to slack
+    update_status "STUDYTIMEEND"
 
+
+  end
 
   on_intent("BACK_IN") do
 
@@ -212,7 +227,7 @@ def update_status status
 
 
   client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
-  message="This is Carol's first chatbot"
+  message="The countdown is starting now!"
   client.api.account.messages.create(
     from: ENV["TWILIO_FROM"],
     to: "+14128971376",
