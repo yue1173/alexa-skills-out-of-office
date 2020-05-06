@@ -1,9 +1,9 @@
 require "sinatra"
 require 'sinatra/reloader' if development?
-require 'twilio-ruby'
 require 'alexa_skills_ruby'
 require 'httparty'
 require 'iso8601'
+require 'twilio-ruby'
 
 # ----------------------------------------------------------------------
 
@@ -119,18 +119,7 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     logger.info 'GetZodiacHoroscopeIntent processed'
   end
 
-  get '/test/sms' do
-    client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
-    message="This is Carol's first chatbot"
-    client.api.account.messages.create(
-      from: ENV["TWILIO_FROM"],
-      to: "+14128971376",
-      body: message
-    )
-
-    'Test message sent'
-  end
-
+  
 end
 
 # ----------------------------------------------------------------------
