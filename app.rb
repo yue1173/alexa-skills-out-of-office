@@ -91,7 +91,9 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
 
   on_intent("GIVEUP") do
     # add a response to Alexa
-    response.set_output_speech_text("Hey, come on! Anyone can hide. Facing up to things, working through them, that is what makes you strong.")
+    response.set_output_speech_text("<speak>
+    <amazon:domain name="music">Hey, come on! Anyone can hide. Facing up to things, working through them, that is what makes you strong. </amazon:domain>
+</speak>")
     # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
     # log the output if needed
