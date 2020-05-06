@@ -24,22 +24,22 @@ enable :sessions
 
 class CustomHandler < AlexaSkillsRuby::Handler
 
-  on_intent("HERE") do
+  on_intent("GREETING") do
 		# add a response to Alexa
-    response.set_output_speech_text("I've updated your status to Here ")
+    response.set_output_speech_text("How are you today?")
 		# create a card response in the alexa app
-    response.set_simple_card(" App", "Status is in the office.")
+    response.set_simple_card("out of office App", "Status is in the office.")
 		# log the output if needed
-    logger.info 'Here processed'
+    logger.info 'Greeting processed'
 		# send a message to slack
-    update_status "HERE"
+    update_status "GREETING"
   end
 
   on_intent("BE_RIGHT_BACK") do
 		# add a response to Alexa
     response.set_output_speech_ssml("<speak>I've updated your status to BE_RIGHT_BACK.<amazon:effect name='whispered'> I am at your back. </amazon:effect></speak>")
 		# create a card response in the alexa app
-    response.set_simple_card("study with me App", "Status is in the office.")
+    response.set_simple_card("out of office App", "Status is in the office.")
 		# log the output if needed
     logger.info 'BE_RIGHT_BACK processed'
 		# send a message to slack
@@ -50,7 +50,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 		# add a response to Alexa
     response.set_output_speech_text("I've updated your status to GONE_HOME")
 		# create a card response in the alexa app
-    response.set_simple_card("study with me App", "Status is in the office.")
+    response.set_simple_card("out of office App", "Status is in the office.")
 		# log the output if needed
     logger.info 'GONE_HOME processed'
 		# send a message to slack
@@ -61,7 +61,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # add a response to Alexa
     response.set_output_speech_text("I've updated your status to DO_NOT_DISTURB")
     # create a card response in the alexa app
-    response.set_simple_card("study with me App", "Status is in the office.")
+    response.set_simple_card("out of office App", "Status is in the office.")
     # log the output if needed
     logger.info 'DO_NOT_DISTURB processed'
     # send a message to slack
@@ -69,7 +69,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
   end
 
   on_intent("AMAZON.HelpIntent") do
-    response.set_output_speech_text("You can ask me to tell you the current study with me status by saying current status. You can update your stats by saying tell study with me i'll be right back, i've gone home, i'm busy, i'm here or i'll be back in 10 minutes")
+    response.set_output_speech_text("You can ask me to tell you the current out of office status by saying current status. You can update your stats by saying tell out of office i'll be right back, i've gone home, i'm busy, i'm here or i'll be back in 10 minutes")
     logger.info 'HelpIntent processed'
   end
 
