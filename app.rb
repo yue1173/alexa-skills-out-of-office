@@ -213,6 +213,14 @@ def update_status status
 # return the appropriate message
   return message
 
+  client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
+  message="This is Carol's first chatbot"
+  client.api.account.messages.create(
+    from: ENV["TWILIO_FROM"],
+    to: "+14128971376",
+    body: message
+  )
+
 end
 
 # def post_to_slack status_update, message
