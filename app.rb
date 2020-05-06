@@ -214,7 +214,7 @@ def update_status status
 
 end
 
-def send_to_twillio message
+def send_to_twilio message
 
   # Default response
   # message = "other/unknown"
@@ -256,7 +256,7 @@ end
 #
 # 	# look up the Slack url from the env
 #   slack_webhook = ENV['SLACK_WEBHOOK']
-# 
+#
 # 	# create a formatted message
 #   formatted_message = "*Study time begins for #{ENV['APP_USER'].to_s}"
 #   #to: #{status_update}*\n
