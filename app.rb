@@ -181,16 +181,16 @@ def get_message_for status, duration
   message = "other/unknown"
 
 	# looks up a message based on the Status provided
-  if status == "HERE"
-    message = ENV['APP_USER'].to_s + " is in the office."
-  elsif status == "BACK_IN"
-    message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
-  elsif status == "BE_RIGHT_BACK"
-    message = ENV['APP_USER'].to_s + " will be right back"
-  elsif status == "GONE_HOME"
-    message = ENV['APP_USER'].to_s + " has left for the day. Check back tomorrow."
-  elsif status == "DO_NOT_DISTURB"
-    message = ENV['APP_USER'].to_s + " is busy. Please do not disturb."
+  if status == "STUDYTIME"
+    message = ENV['APP_USER'].to_s + " study time begins."
+  # #elsif status == "BACK_IN"
+  #   message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
+  # elsif status == "BE_RIGHT_BACK"
+  #   message = ENV['APP_USER'].to_s + " will be right back"
+  # elsif status == "GONE_HOME"
+  #   message = ENV['APP_USER'].to_s + " has left for the day. Check back tomorrow."
+  # elsif status == "DO_NOT_DISTURB"
+  #   message = ENV['APP_USER'].to_s + " is busy. Please do not disturb."
   end
 
 	# return the appropriate message
@@ -204,7 +204,8 @@ def post_to_slack status_update, message
   slack_webhook = ENV['SLACK_WEBHOOK']
 
 	# create a formatted message
-  formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
+  formatted_message = "*Study time begins for #{ENV['APP_USER'].to_s}"
+  #to: #{status_update}*\n
   formatted_message += "#{message} "
 
 	# Post it to Slack
