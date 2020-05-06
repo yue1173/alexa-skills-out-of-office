@@ -5,7 +5,6 @@ require 'alexa_skills_ruby'
 require 'httparty'
 require 'iso8601'
 
-require 'ralyxa'
 
 
 
