@@ -85,6 +85,17 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     update_status "JOKES"
   end
 
+  on_intent("THANKS") do
+    # add a response to Alexa
+    response.set_output_speech_text("Hope it can help you feel better.")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'THANKS processed'
+    # send a message to slack
+    update_status "THANKS"
+  end
+
   on_intent("GIVEUP") do
     # add a response to Alexa
     response.set_output_speech_ssml("<speak>
