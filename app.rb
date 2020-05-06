@@ -215,8 +215,8 @@ def update_status status
 # looks up a message based on the Status provided
   if status == "STUDYTIME"
     message = ENV['APP_USER'].to_s + ", study time begins."
-  # #elsif status == "BACK_IN"
-  #   message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
+  elsif status == "STUDYTIMEEND"
+    message = ENV['APP_USER'].to_s + ", study time ends."
   # elsif status == "BE_RIGHT_BACK"
   #   message = ENV['APP_USER'].to_s + " will be right back"
   # elsif status == "GONE_HOME"
