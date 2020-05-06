@@ -37,7 +37,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("CHECKSTUDY") do
     # add a response to Alexa
-    response.set_output_speech_text("Good! Do you have any study plan today?")
+    response.set_output_speech_text("Good! I am your study bot. Welcome to study with me and you can say Help to get to know me more. Or you can start your study today now by saying study now")
     # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
     # log the output if needed
@@ -45,6 +45,23 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # send a message to slack
     update_status "CHECKSTUDY"
   end
+
+  on_intent("AMAZON.HelpIntent") do
+    response.set_output_speech_text("I am your study buddy when you study at home. You can set study time and I will count down for you. I can also provide music and white noices to help you study. I can also tell jokes to help you feel relax. Trying to say study now to start your study today:)")
+    logger.info 'HelpIntent processed'
+  end
+
+  on_intent("JOKES") do
+    # add a response to Alexa
+    response.set_output_speech_text("")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'JOKES processed'
+    # send a message to slack
+    update_status "JOKES"
+  end
+
 
   on_intent("BE_RIGHT_BACK") do
 		# add a response to Alexa
@@ -59,21 +76,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
 
 
-  on_intent("DO_NOT_DISTURB") do
-    # add a response to Alexa
-    response.set_output_speech_text("I've updated your status to DO_NOT_DISTURB")
-    # create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
-    # log the output if needed
-    logger.info 'DO_NOT_DISTURB processed'
-    # send a message to slack
-    update_status "DO_NOT_DISTURB"
-  end
 
-  on_intent("AMAZON.HelpIntent") do
-    response.set_output_speech_text("I am your study buddy when you study at home. You can set study time and I will count down for you. I can also provide music and white noices to help you study. I can also tell jokes to help you feel relax. Trying to say study now to start your study today.")
-    logger.info 'HelpIntent processed'
-  end
 
   on_intent("BACK_IN") do
 
