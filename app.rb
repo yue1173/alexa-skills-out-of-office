@@ -227,7 +227,6 @@ def update_status status
 
 
   client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
-  message="The countdown is starting now!"
   client.api.account.messages.create(
     from: ENV["TWILIO_FROM"],
     to: "+14128971376",
