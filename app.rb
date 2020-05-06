@@ -5,9 +5,6 @@ require 'alexa_skills_ruby'
 require 'httparty'
 require 'iso8601'
 
-
-
-
 # ----------------------------------------------------------------------
 
 # Load environment variables using Dotenv. If a .env file exists, it will
@@ -21,96 +18,33 @@ end
 enable :sessions
 
 
-#post '/' do
-  #Ralyxa::Skill.handle(request)
-#end
-
 # ----------------------------------------------------------------------
 #     How you handle your Alexa
 # ----------------------------------------------------------------------
 
 class CustomHandler < AlexaSkillsRuby::Handler
 
-
-  #on_intent("firstsentence") do
-  #ask("How are you today?")
-#end
-
-# on_intent("firstsentence") do
-#   # add a response to Alexa
-#   response.set_output_speech_text("How are you doing")
-#   # create a card response in the alexa app
-#   response.set_simple_card("study with me App", "firstsentence.")
-#   # log the output if needed
-#   logger.info 'firstsentence processed'
-#   # send a message to slack
-#   update_status "firstsentence."
-# end
-
-  on_intent("Greeting") do
-    # add a response to Alexa
-    response.set_output_speech_text("I am doing well! I am your study buddy! You can ask 'who are you' to know more about me or directly go to study by saying ’study time begins ")
-    # create a card response in the alexa app
-    response.set_simple_card("study with me App", "Study time from now on.")
-    # log the output if needed
-    logger.info 'Greeting processed'
-    # send a message to slack
-    update_status "Greeting."
+  on_intent("HERE") do
+		# add a response to Alexa
+    response.set_output_speech_text("I've updated your status to Here ")
+		# create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+		# log the output if needed
+    logger.info 'Here processed'
+		# send a message to slack
+    update_status "HERE"
   end
 
-  #intent "PlayAudio" do
-  #audio_player.play(
-    #'https://s3.amazonaws.com/my-ssml-samples/Flourish.mp3',
-  #  'flourish-token',
-    #speech: 'Playing Audio'
-  #)
-#end
-
-
-  on_intent("AMAZON.HelpIntent") do
-    # add a response to Alexa
-    response.set_output_speech_text("I am your study buddy. I can help you set study time for your everyday study. You can set multiple rounds of study and each round will lasting 30 minutes, including 25-minute studying time and 5-minute rest time. Also I can provide you different help in your study process. You can call me to tell jokes or help you find music you like. ")
-    # create a card response in the alexa app
-    response.set_simple_card("study with me App", "Study time from now on.")
-    # log the output if needed
-    logger.info 'Help processed'
-    # send a message to slack
-    update_status "Morning."
+  on_intent("BE_RIGHT_BACK") do
+		# add a response to Alexa
+    response.set_output_speech_ssml("<speak>I've updated your status to BE_RIGHT_BACK.<amazon:effect name='whispered'> I am at your back. </amazon:effect></speak>")
+		# create a card response in the alexa app
+    response.set_simple_card("Out of Office App", "Status is in the office.")
+		# log the output if needed
+    logger.info 'BE_RIGHT_BACK processed'
+		# send a message to slack
+    update_status "BE_RIGHT_BACK"
   end
-
-  # on_intent("Studytime") do
-	# 	# add a response to Alexa
-  #   response.set_output_speech_text("How long time would like to study now?")
-	# 	# create a card response in the alexa app
-  #   response.set_simple_card("Study with me app", "setstudytime.")
-	# 	# log the output if needed
-  #   logger.info 'studytime.'
-	# 	# send a message to slack
-  #   update_status "studytime."
-  # end
-  #
-  # on_intent("music") do
-	# 	# add a response to Alexa
-  #   response.set_output_speech_ssml("audio src='https://mc2method.org/white-noise/download.php?file=01-White-Noise&length=10'")
-	# 	# create a card response in the alexa app
-  #   response.set_simple_card("Out of Office App", "Status is in the office.")
-	# 	# log the output if needed
-  #   logger.info 'music processed.'
-	# 	# send a message to slack
-  #   update_status "music."
-  # end
-  #
-  #
-  # on_intent("persist") do
-	# 	# add a response to Alexa
-  #   response.set_output_speech_ssml("<speak>Persistent is the key to success!<amazon:effect name='whispered'> Keep at it.I think you did a good job. </amazon:effect></speak>")
-	# 	# create a card response in the alexa app
-  #   response.set_simple_card("study with me App", "persist.")
-	# 	# log the output if needed
-  #   logger.info 'persist processed.'
-	# 	# send a message to slack
-  #   update_status "persist."
-  # end
 
   on_intent("GONE_HOME") do
 		# add a response to Alexa
@@ -118,9 +52,9 @@ class CustomHandler < AlexaSkillsRuby::Handler
 		# create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
 		# log the output if needed
-    logger.info 'GONE_HOME processed.'
+    logger.info 'GONE_HOME processed'
 		# send a message to slack
-    update_status "GONE_HOME."
+    update_status "GONE_HOME"
   end
 
   on_intent("DO_NOT_DISTURB") do
@@ -129,9 +63,14 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
     # log the output if needed
-    logger.info 'DO_NOT_DISTURB processed.'
+    logger.info 'DO_NOT_DISTURB processed'
     # send a message to slack
     update_status "DO_NOT_DISTURB"
+  end
+
+  on_intent("AMAZON.HelpIntent") do
+    response.set_output_speech_text("You can ask me to tell you the current out of office status by saying current status. You can update your stats by saying tell out of office i'll be right back, i've gone home, i'm busy, i'm here or i'll be back in 10 minutes")
+    logger.info 'HelpIntent processed'
   end
 
   on_intent("BACK_IN") do
@@ -185,8 +124,6 @@ end
 # THE APPLICATION ID CAN BE FOUND IN THE
 
 
-
-
 post '/incoming/alexa' do
   content_type :json
 
@@ -236,12 +173,12 @@ def get_message_for status, duration
   message = "other/unknown"
 
 	# looks up a message based on the Status provided
-  if status == "study_begins"
-    message = ENV['APP_USER'].to_s + " starts studying."
+  if status == "HERE"
+    message = ENV['APP_USER'].to_s + " is in the office."
   elsif status == "BACK_IN"
     message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
-  elsif status == "studyends"
-    message = ENV['APP_USER'].to_s + " can have a rest now"
+  elsif status == "BE_RIGHT_BACK"
+    message = ENV['APP_USER'].to_s + " will be right back"
   elsif status == "GONE_HOME"
     message = ENV['APP_USER'].to_s + " has left for the day. Check back tomorrow."
   elsif status == "DO_NOT_DISTURB"
@@ -259,8 +196,7 @@ def post_to_slack status_update, message
   slack_webhook = ENV['SLACK_WEBHOOK']
 
 	# create a formatted message
-  formatted_message = "This study round for #{ENV['APP_USER'].to_s} is #{update_status}"
-  #formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
+  formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
   formatted_message += "#{message} "
 
 	# Post it to Slack
