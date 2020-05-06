@@ -13,6 +13,7 @@ GEM
       activesupport (>= 4.2)
       addressable (~> 2.5)
       multi_json (~> 1.0)
+    blaxter-duration (0.1.4)
     concurrent-ruby (1.1.6)
     dotenv (2.7.5)
     faraday (1.0.1)
@@ -62,6 +63,7 @@ PLATFORMS
 
 DEPENDENCIES
   alexa_skills_ruby
+  blaxter-duration
   dotenv
   httparty
   iso8601

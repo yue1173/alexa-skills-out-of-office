@@ -4,6 +4,7 @@ require 'alexa_skills_ruby'
 require 'httparty'
 require 'iso8601'
 require 'twilio-ruby'
+require 'blaxter-duration'
 
 # ----------------------------------------------------------------------
 
@@ -37,7 +38,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("CHECKSTUDY") do
     # add a response to Alexa
-    response.set_output_speech_text("Good! I am your study bot. Welcome to study with me and you can say Help to get to know me more. Or you can start your study today now by saying study now")
+    response.set_output_speech_text("Good! I am your study bot. Welcome to study with me and you can get to know me more by saying who are you . Or you can start your study today now by saying study now")
     # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
     # log the output if needed
@@ -47,8 +48,34 @@ class CustomHandler < AlexaSkillsRuby::Handler
   end
 
   on_intent("AMAZON.HelpIntent") do
-    response.set_output_speech_text("I am your study buddy when you study at home. You can set study time and I will count down for you. I can also provide music and white noices to help you study. I can also tell jokes to help you feel relax. Trying to say study now to start your study today:)")
+    response.set_output_speech_text("Hi, I am your study buddy. I will company with you and always on your side in the study. Whenever you want to share something, just call me! You can try your first task by saying study now:)")
     logger.info 'HelpIntent processed'
+  end
+
+  on_intent("STUDYTIME") do
+    # add a response to Alexa
+    response.set_output_speech_ssml("<speak>
+    <amazon:emotion name='excited' intensity='medium'>
+        Let's start the journey together! You will receive a message to mark your study.
+    </amazon:emotion>
+  </speak>")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'STUDYTIME'
+    # send a message to slack
+    update_status "STUDYTIME"
+  end
+
+  on_intent("UPSET") do
+    # add a response to Alexa
+    response.set_output_speech_text("It is OK. Life is not easy for any of us but you have me. Do you want some jokes? Just say jokes")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'UPSET processed'
+    # send a message to slack
+    update_status "UPSET"
   end
 
   on_intent("JOKES") do
@@ -63,29 +90,27 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     update_status "JOKES"
   end
 
-
-  on_intent("STUDYTIME") do
-		# add a response to Alexa
-    response.set_output_speech_ssml("<speak>
-    <amazon:emotion name='excited' intensity='medium'>
-        Let's start now! You will receive a message as the count down starts.
-    </amazon:emotion>
+  on_intent("GIVEUP") do
+    # add a response to Alexa
+    response.set_output_speech_text(<speak>
+    <"amazon:domain name='music'>
+        Hey, come on! Anyone can hide. Facing up to things, working through them, that’s what makes you strong.
+    </amazon:domain>
 </speak>")
-		# create a card response in the alexa app
+    ("")
+    # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
-		# log the output if needed
-    logger.info 'STUDYTIME'
-		# send a message to slack
-    update_status "STUDYTIME"
-
-
+    # log the output if needed
+    logger.info 'GIVEUP processed'
+    # send a message to slack
+    update_status "GIVEUP"
   end
 
   on_intent("STUDYTIMEEND") do
     # add a response to Alexa
     response.set_output_speech_ssml("<speak>
     <amazon:emotion name='excited' intensity='medium'>
-        You did a really good job!
+        Congragulations! You did a really good job! I am so proud of you!
     </amazon:emotion>
   </speak>")
     # create a card response in the alexa app
@@ -216,7 +241,7 @@ def update_status status
   if status == "STUDYTIME"
     message = ENV['APP_USER'].to_s + ", study time begins."
   elsif status == "STUDYTIMEEND"
-    message = ENV['APP_USER'].to_s + ", study time ends."
+    message = ENV['APP_USER'].to_s + ", you can have a rest now."
   # elsif status == "BE_RIGHT_BACK"
   #   message = ENV['APP_USER'].to_s + " will be right back"
   # elsif status == "GONE_HOME"
@@ -234,6 +259,7 @@ def update_status status
   )
 
 end
+
 
 # def post_to_slack status_update, message
 #
