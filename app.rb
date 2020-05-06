@@ -33,7 +33,7 @@ end
 class CustomHandler < AlexaSkillsRuby::Handler
 
 
-  intent "firstsentence" do
+  on_intent("firstsentence") do
   ask("How are you today?")
 end
 
@@ -70,13 +70,13 @@ end
 
   on_intent("Studytime") do
 		# add a response to Alexa
-    response.set_output_speech_text("How long time would like to study today?")
+    response.set_output_speech_text("How long time would like to study now?")
 		# create a card response in the alexa app
     response.set_simple_card("Study with me app", "setstudytime.")
 		# log the output if needed
-    logger.info 'settime'
+    logger.info 'studytime'
 		# send a message to slack
-    update_status "study_begins"
+    update_status "studytime"
   end
 
   on_intent("music") do
@@ -85,21 +85,21 @@ end
 		# create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
 		# log the output if needed
-    logger.info 'BE_RIGHT_BACK processed'
+    logger.info 'music processed'
 		# send a message to slack
-    update_status "BE_RIGHT_BACK"
+    update_status "music"
   end
 
 
-  on_intent("studyends") do
+  on_intent("persist") do
 		# add a response to Alexa
-    response.set_output_speech_ssml("<speak>Your study time ends<amazon:effect name='whispered'> I think you did a good job </amazon:effect></speak>")
+    response.set_output_speech_ssml("<speak>Persistent is the key to success!<amazon:effect name='whispered'> Keep at it.I think you did a good job. </amazon:effect></speak>")
 		# create a card response in the alexa app
-    response.set_simple_card("study with me App", "study ends.")
+    response.set_simple_card("study with me App", "persist.")
 		# log the output if needed
-    logger.info 'studyends processed'
+    logger.info 'persist processed'
 		# send a message to slack
-    update_status "studyends"
+    update_status "persist"
   end
 
   on_intent("GONE_HOME") do
