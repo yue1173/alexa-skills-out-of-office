@@ -13,4 +13,3 @@ end
 gem 'httparty'
 gem 'alexa_skills_ruby'
 gem 'iso8601'
-gem 'ralyxa'
