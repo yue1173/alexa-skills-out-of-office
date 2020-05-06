@@ -36,16 +36,16 @@ class CustomHandler < AlexaSkillsRuby::Handler
   #ask("How are you today?")
 #end
 
-on_intent("firstsentence") do
-  # add a response to Alexa
-  response.set_output_speech_text("How are you doing ")
-  # create a card response in the alexa app
-  response.set_simple_card("study with me App", "firstsentence.")
-  # log the output if needed
-  logger.info 'firstsentence processed'
-  # send a message to slack
-  update_status "firstsentence."
-end
+# on_intent("firstsentence") do
+#   # add a response to Alexa
+#   response.set_output_speech_text("How are you doing")
+#   # create a card response in the alexa app
+#   response.set_simple_card("study with me App", "firstsentence.")
+#   # log the output if needed
+#   logger.info 'firstsentence processed'
+#   # send a message to slack
+#   update_status "firstsentence."
+# end
 
   on_intent("Greeting") do
     # add a response to Alexa
@@ -78,39 +78,39 @@ end
     update_status "Morning."
   end
 
-  on_intent("Studytime") do
-		# add a response to Alexa
-    response.set_output_speech_text("How long time would like to study now?")
-		# create a card response in the alexa app
-    response.set_simple_card("Study with me app", "setstudytime.")
-		# log the output if needed
-    logger.info 'studytime'
-		# send a message to slack
-    update_status "studytime"
-  end
-
-  on_intent("music") do
-		# add a response to Alexa
-    response.set_output_speech_ssml("audio src='https://mc2method.org/white-noise/download.php?file=01-White-Noise&length=10'")
-		# create a card response in the alexa app
-    response.set_simple_card("Out of Office App", "Status is in the office.")
-		# log the output if needed
-    logger.info 'music processed'
-		# send a message to slack
-    update_status "music"
-  end
-
-
-  on_intent("persist") do
-		# add a response to Alexa
-    response.set_output_speech_ssml("<speak>Persistent is the key to success!<amazon:effect name='whispered'> Keep at it.I think you did a good job. </amazon:effect></speak>")
-		# create a card response in the alexa app
-    response.set_simple_card("study with me App", "persist.")
-		# log the output if needed
-    logger.info 'persist processed'
-		# send a message to slack
-    update_status "persist"
-  end
+  # on_intent("Studytime") do
+	# 	# add a response to Alexa
+  #   response.set_output_speech_text("How long time would like to study now?")
+	# 	# create a card response in the alexa app
+  #   response.set_simple_card("Study with me app", "setstudytime.")
+	# 	# log the output if needed
+  #   logger.info 'studytime.'
+	# 	# send a message to slack
+  #   update_status "studytime."
+  # end
+  #
+  # on_intent("music") do
+	# 	# add a response to Alexa
+  #   response.set_output_speech_ssml("audio src='https://mc2method.org/white-noise/download.php?file=01-White-Noise&length=10'")
+	# 	# create a card response in the alexa app
+  #   response.set_simple_card("Out of Office App", "Status is in the office.")
+	# 	# log the output if needed
+  #   logger.info 'music processed.'
+	# 	# send a message to slack
+  #   update_status "music."
+  # end
+  #
+  #
+  # on_intent("persist") do
+	# 	# add a response to Alexa
+  #   response.set_output_speech_ssml("<speak>Persistent is the key to success!<amazon:effect name='whispered'> Keep at it.I think you did a good job. </amazon:effect></speak>")
+	# 	# create a card response in the alexa app
+  #   response.set_simple_card("study with me App", "persist.")
+	# 	# log the output if needed
+  #   logger.info 'persist processed.'
+	# 	# send a message to slack
+  #   update_status "persist."
+  # end
 
   on_intent("GONE_HOME") do
 		# add a response to Alexa
@@ -118,9 +118,9 @@ end
 		# create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
 		# log the output if needed
-    logger.info 'GONE_HOME processed'
+    logger.info 'GONE_HOME processed.'
 		# send a message to slack
-    update_status "GONE_HOME"
+    update_status "GONE_HOME."
   end
 
   on_intent("DO_NOT_DISTURB") do
@@ -129,7 +129,7 @@ end
     # create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
     # log the output if needed
-    logger.info 'DO_NOT_DISTURB processed'
+    logger.info 'DO_NOT_DISTURB processed.'
     # send a message to slack
     update_status "DO_NOT_DISTURB"
   end

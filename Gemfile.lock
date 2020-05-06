@@ -13,7 +13,6 @@ GEM
       activesupport (>= 4.2)
       addressable (~> 2.5)
       multi_json (~> 1.0)
-    alexa_verifier (1.0.0)
     concurrent-ruby (1.1.6)
     dotenv (2.7.5)
     httparty (0.18.0)
@@ -35,8 +34,6 @@ GEM
     rack (2.2.2)
     rack-protection (2.0.8.1)
       rack
-    ralyxa (1.8.0)
-      alexa_verifier (~> 1.0)
     ruby2_keywords (0.0.2)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
@@ -58,7 +55,6 @@ DEPENDENCIES
   httparty
   iso8601
   json
-  ralyxa
   sinatra
 
 BUNDLED WITH
