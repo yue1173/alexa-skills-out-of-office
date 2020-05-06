@@ -106,7 +106,7 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
       response.set_output_speech_text("I've set you away for #{ mins } minutes")
     end
     logger.info 'BackIn processed'
-    update_status "BACK_IN", duration
+    update_status "BACK_IN"
   end
 
   on_intent("GetZodiacHoroscopeIntent") do
