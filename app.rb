@@ -1,6 +1,6 @@
 require "sinatra"
 require 'sinatra/reloader' if development?
-
+require 'twilio-ruby'
 require 'alexa_skills_ruby'
 require 'httparty'
 require 'iso8601'
@@ -77,6 +77,8 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     logger.info 'STUDYTIME'
 		# send a message to slack
     update_status "STUDYTIME"
+
+
   end
 
 
@@ -117,6 +119,18 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
     logger.info 'GetZodiacHoroscopeIntent processed'
   end
 
+  get '/test/sms' do
+    client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
+    message="This is Carol's first chatbot"
+    client.api.account.messages.create(
+      from: ENV["TWILIO_FROM"],
+      to: "+14128971376",
+      body: message
+    )
+
+    'Test message sent'
+  end
+
 end
 
 # ----------------------------------------------------------------------
@@ -147,6 +161,29 @@ post '/incoming/alexa' do
 
 end
 
+# # Build a twilio response object
+# twiml = Twilio::TwiML::MessagingResponse.new do |r|
+#   r.message do |m|
+#
+#     # add the text of the response
+#     m.body( message )
+#
+#     # add media if it is defined
+#     unless media.nil?
+#       m.media( media )
+#     end
+#   end
+# end
+#
+# # increment the session counter
+# session["counter"] += 1
+#
+# # send a response to twilio
+# content_type 'text/xml'
+# twiml.to_s
+
+# end
+
 
 
 # ----------------------------------------------------------------------
@@ -166,16 +203,33 @@ end
 
 private
 
-def update_status status, duration = nil
+
+
+def update_status status
 
 	# gets a corresponding message
-  message = get_message_for status, duration
+  message = get_message_for status
 	# posts it to slack
-  post_to_slack status, message
+  send_to_twilio message
 
 end
 
-def get_message_for status, duration
+def send_to_twillio message
+
+  # Default response
+  # message = "other/unknown"
+
+  # looks up a message based on the Status provided
+  client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
+  client.api.account.messages.create(
+    from: ENV["TWILIO_FROM"],
+    to: "+14128971376",
+    body: message
+  )
+
+end
+
+def get_message_for status
 
 	# Default response
   message = "other/unknown"
@@ -194,21 +248,21 @@ def get_message_for status, duration
   end
 
 	# return the appropriate message
-  message
+  return message
 
 end
 
-def post_to_slack status_update, message
-
-	# look up the Slack url from the env
-  slack_webhook = ENV['SLACK_WEBHOOK']
-
-	# create a formatted message
-  formatted_message = "*Study time begins for #{ENV['APP_USER'].to_s}"
-  #to: #{status_update}*\n
-  formatted_message += "#{message} "
-
-	# Post it to Slack
-  HTTParty.post slack_webhook, body: {text: formatted_message.to_s, username: "OutOfOfficeBot", channel: "back" }.to_json, headers: {'content-type' => 'application/json'}
-
-end
+# def post_to_slack status_update, message
+#
+# 	# look up the Slack url from the env
+#   slack_webhook = ENV['SLACK_WEBHOOK']
+# 
+# 	# create a formatted message
+#   formatted_message = "*Study time begins for #{ENV['APP_USER'].to_s}"
+#   #to: #{status_update}*\n
+#   formatted_message += "#{message} "
+#
+# 	# Post it to Slack
+#   HTTParty.post slack_webhook, body: {text: formatted_message.to_s, username: "studywithmeBot", channel: "back" }.to_json, headers: {'content-type' => 'application/json'}
+#
+# end
