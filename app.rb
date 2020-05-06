@@ -41,31 +41,43 @@ class CustomHandler < AlexaSkillsRuby::Handler
     # create a card response in the alexa app
     response.set_simple_card("study with me App", "Study time from now on.")
     # log the output if needed
-    logger.info 'Greeting processed'
+    logger.info 'Help processed'
     # send a message to slack
     update_status "Morning."
   end
 
-  on_intent("HERE") do
+  on_intent("Studytime") do
 		# add a response to Alexa
-    response.set_output_speech_text("I've updated your status to Here ")
+    response.set_output_speech_text("How long time would like to study today?")
 		# create a card response in the alexa app
-    response.set_simple_card("Out of Office App", "Status is in the office.")
+    response.set_simple_card("Study with me app", "setstudytime.")
 		# log the output if needed
-    logger.info 'Here processed'
+    logger.info 'settime'
 		# send a message to slack
-    update_status "HERE"
+    update_status "study_begins"
   end
 
-  on_intent("BE_RIGHT_BACK") do
+  on_intent("music") do
 		# add a response to Alexa
-    response.set_output_speech_ssml("<speak>I've updated your status to BE_RIGHT_BACK.<amazon:effect name='whispered'> I am at your back. </amazon:effect></speak>")
+    response.set_output_speech_ssml("audio src='https://mc2method.org/white-noise/download.php?file=01-White-Noise&length=10'")
 		# create a card response in the alexa app
     response.set_simple_card("Out of Office App", "Status is in the office.")
 		# log the output if needed
     logger.info 'BE_RIGHT_BACK processed'
 		# send a message to slack
     update_status "BE_RIGHT_BACK"
+  end
+
+
+  on_intent("studyends") do
+		# add a response to Alexa
+    response.set_output_speech_ssml("<speak>Your study time ends<amazon:effect name='whispered'> I think you did a good job </amazon:effect></speak>")
+		# create a card response in the alexa app
+    response.set_simple_card("study with me App", "study ends.")
+		# log the output if needed
+    logger.info 'studyends processed'
+		# send a message to slack
+    update_status "studyends"
   end
 
   on_intent("GONE_HOME") do
@@ -190,12 +202,12 @@ def get_message_for status, duration
   message = "other/unknown"
 
 	# looks up a message based on the Status provided
-  if status == "HERE"
-    message = ENV['APP_USER'].to_s + " is in the office."
+  if status == "study_begins"
+    message = ENV['APP_USER'].to_s + " starts studying."
   elsif status == "BACK_IN"
     message = ENV['APP_USER'].to_s + " will be back in #{(duration/60).round} minutes"
-  elsif status == "BE_RIGHT_BACK"
-    message = ENV['APP_USER'].to_s + " will be right back"
+  elsif status == "studyends"
+    message = ENV['APP_USER'].to_s + " can have a rest now"
   elsif status == "GONE_HOME"
     message = ENV['APP_USER'].to_s + " has left for the day. Check back tomorrow."
   elsif status == "DO_NOT_DISTURB"
@@ -213,7 +225,8 @@ def post_to_slack status_update, message
   slack_webhook = ENV['SLACK_WEBHOOK']
 
 	# create a formatted message
-  formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
+  formatted_message = "This study round for #{ENV['APP_USER'].to_s} is #{update_status}"
+  #formatted_message = "*Status Changed for #{ENV['APP_USER'].to_s} to: #{status_update}*\n"
   formatted_message += "#{message} "
 
 	# Post it to Slack
