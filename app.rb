@@ -66,9 +66,11 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
 
   on_intent("STUDYTIME") do
 		# add a response to Alexa
-    response.set_output_speech_ssml("<speak><amazon:emotion name='excited',intensity='medium'</speak>")
-        Let's study now!
-    </amazon:emotion></speak>")
+    response.set_output_speech_ssml("<speak>
+    <amazon:emotion name='excited' intensity='medium'>
+        Let's start now! You will receive a message as the count down starts.
+    </amazon:emotion>
+</speak>")
 		# create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
 		# log the output if needed
