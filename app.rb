@@ -53,11 +53,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
 
   on_intent("STUDYTIME") do
     # add a response to Alexa
-    response.set_output_speech_ssml("<speak>
-    <amazon:emotion name='excited' intensity='medium'>
-        Let's start the journey together! You will receive a message to mark your study.
-    </amazon:emotion>
-  </speak>")
+    response.set_output_speech_text("Let's start the journey together! You will receive a message to mark your study.")
     # create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
     # log the output if needed
