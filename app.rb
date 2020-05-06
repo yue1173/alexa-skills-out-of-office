@@ -47,7 +47,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
   end
 
   on_intent("AMAZON.HelpIntent") do
-    response.set_output_speech_text("Hi, I am your study buddy. I will company with you and always on your side in the study. Whenever you want to share something, just call me! You can try your first task by saying study now:)")
+    response.set_output_speech_text("Hi, I am your study buddy. I will company with you and always on your side in the study. Whenever you want to share something, just call me! You can try your first task by saying study now")
     logger.info 'HelpIntent processed'
   end
 
