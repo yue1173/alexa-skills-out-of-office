@@ -35,6 +35,17 @@ class CustomHandler < AlexaSkillsRuby::Handler
     update_status "GREETING"
   end
 
+  on_intent("CHECKSTUDY") do
+    # add a response to Alexa
+    response.set_output_speech_text("Good! Do you have any study plan today?")
+    # create a card response in the alexa app
+    response.set_simple_card("out of office App", "Status is in the office.")
+    # log the output if needed
+    logger.info 'CHECKSTUDY processed'
+    # send a message to slack
+    update_status "CHECKSTUDY"
+  end
+
   on_intent("BE_RIGHT_BACK") do
 		# add a response to Alexa
     response.set_output_speech_ssml("<speak>I've updated your status to BE_RIGHT_BACK.<amazon:effect name='whispered'> I am at your back. </amazon:effect></speak>")
@@ -46,16 +57,7 @@ class CustomHandler < AlexaSkillsRuby::Handler
     update_status "BE_RIGHT_BACK"
   end
 
-  on_intent("GONE_HOME") do
-		# add a response to Alexa
-    response.set_output_speech_text("I've updated your status to GONE_HOME")
-		# create a card response in the alexa app
-    response.set_simple_card("out of office App", "Status is in the office.")
-		# log the output if needed
-    logger.info 'GONE_HOME processed'
-		# send a message to slack
-    update_status "GONE_HOME"
-  end
+
 
   on_intent("DO_NOT_DISTURB") do
     # add a response to Alexa
