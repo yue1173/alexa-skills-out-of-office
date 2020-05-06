@@ -63,7 +63,6 @@ PLATFORMS
 
 DEPENDENCIES
   alexa_skills_ruby
-  blaxter-duration
   dotenv
   httparty
   iso8601
