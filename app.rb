@@ -22,9 +22,9 @@ end
 enable :sessions
 
 
-post '/' do
-  Ralyxa::Skill.handle(request)
-end
+#post '/' do
+  #Ralyxa::Skill.handle(request)
+#end
 
 # ----------------------------------------------------------------------
 #     How you handle your Alexa
@@ -59,13 +59,13 @@ end
     update_status "Greeting."
   end
 
-  intent "PlayAudio" do
-  audio_player.play(
-    'https://s3.amazonaws.com/my-ssml-samples/Flourish.mp3',
-    'flourish-token',
-    speech: 'Playing Audio'
-  )
-end
+  #intent "PlayAudio" do
+  #audio_player.play(
+    #'https://s3.amazonaws.com/my-ssml-samples/Flourish.mp3',
+  #  'flourish-token',
+    #speech: 'Playing Audio'
+  #)
+#end
 
 
   on_intent("AMAZON.HelpIntent") do
