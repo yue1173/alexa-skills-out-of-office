@@ -66,15 +66,15 @@ Why the big pause? asks the bartender. The bear shrugged. I'm not sure. I was bo
 
   on_intent("STUDYTIME") do
 		# add a response to Alexa
-    response.set_output_speech_ssml("<speak><amazon:emotion name="excited" intensity="medium">
+    response.set_output_speech_ssml("<speak><amazon:emotion name="excited" intensity="medium"</speak>>
         Let's study now!
     </amazon:emotion></speak>")
 		# create a card response in the alexa app
     response.set_simple_card("out of office App", "Status is in the office.")
 		# log the output if needed
-    logger.info 'BE_RIGHT_BACK processed'
+    logger.info 'STUDYTIME'
 		# send a message to slack
-    update_status "BE_RIGHT_BACK"
+    update_status "STUDYTIME"
   end
 
 
